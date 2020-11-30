@@ -1,0 +1,38 @@
+Desires?
+Movie is Key/Key ID
+-results displaying functionality
+-have image popout like a tooltip with more details when user clicks on poster or url
+-onClick dsimplays movie details
+    -star rating
+    -overview
+    -genre
+    -release date
+(done)-display poster image
+(done)-fill the screen with the poster images only
+-add search functionality
+-add sort functionality
+-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

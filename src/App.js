@@ -14,10 +14,12 @@ class App extends React.Component {
   componentDidMount() {
     this.loadMovies();
   }
-
+  loadImage () {
+    const imgurl = "https://api.themoviedb.org/3/movie/{movie_id}/images?api_key=b6fbc7f3f313bd395902af464ef47262&language=en-US"
+  }
   loadMovies() {
     // go grab (aka get) all the data from some url
-    const url = "https://api.themoviedb.org/3/discover/movie?api_key=b6fbc7f3f313bd395902af464ef47262&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
+    const url = "https://api.themoviedb.org/3/discover/movie?api_key=b6fbc7f3f313bd395902af464ef47262&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1append_to_response=videos,images&include_image_language";
     axios.get(url)
       .then(response =>
       {
@@ -37,10 +39,17 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Check out these movies!!!!!!</h1>
+        <div className="container">
         {this.state.movies.map(movie =>
           {
-            return <h2>{movie.title} ({movie.release_date})</h2>;
+          return(
+              <div className="image">
+                <img src={'https://image.tmdb.org/t/p/w500'+ movie.poster_path} alt={'poster image for ' + movie.title} className="posterimage" />
+                  <div className="prettify posterimage"><span>{movie.title} ({movie.release_date})</span></div>
+              </div>
+            )
           })}
+          </div>
       </div>
     );
   }
