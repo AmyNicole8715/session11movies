@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './App.css';
-// import './App.scss';
+import './App.scss';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 
