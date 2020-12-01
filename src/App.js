@@ -1,15 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import './App.scss';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-
+import { Navbar, Nav, Form, FormControl, Button, DropdownButton, Dropdown } from 'react-bootstrap';
+import Image from './assets/images/totallynotnetflix.png';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      movies: []
+      movies: [],
+      genre: [],
     }
   }
 
@@ -28,7 +29,16 @@ class App extends React.Component {
       });
 
   }
-
+  SortByAction () {
+    const genurl = "https://api.themoviedb.org/3/genre/movie/list?api_key=b6fbc7f3f313bd395902af464ef47262&language=en-US";
+    axios.get(genurl)
+      .then(response =>
+        {
+          this.setState({genre: response.data.results})
+        })
+    
+  }
+  
   render() {
     // let movies = [];
     // for(let i = 0; i < this.state.movies.length; i++)
@@ -39,20 +49,35 @@ class App extends React.Component {
     return (
       
       <div className="App">
-        <Navbar bg="light" expand="lg" fixed="top">
-          <Navbar.Brand href="#home"><img src='\assets\images\totallynotnetflix.png'></img></Navbar.Brand>
+        <Navbar bg="dark" expand="lg" fixed="top">
+          <Navbar.Brand href="#home">
+            <img 
+              src={Image} 
+              width="100"
+              height="100"
+              className="logo"
+              alt="Totally Not Netflix logo"
+            />
+            </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
             </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+            <DropdownButton id="dropdown-basic-button" title="Sort by">
+              {/* {this.state.genre.map(genre =>
+              {
+                return(
+                  <Dropdown.Item href="#/action-1">{genre}</Dropdown.Item>
+                )
+              })} */}
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Comedy</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Popularity</Dropdown.Item>
+            </DropdownButton>
           </Navbar.Collapse>
         </Navbar>
         
-        <h1><marquee direction="left" scrollamount="20" behaviour="scroll" className="banner">Check out these movies!!!!!!</marquee></h1>
+
         <div className="containmovie">
         {this.state.movies.map(movie =>
           {
